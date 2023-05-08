@@ -30,33 +30,33 @@ export const Giver = ({ state, update, dispatch }) => {
   return (
     <>
       <div className={flexClass + 'mb-3 text-center'}>
-        <h1>Gift a name on NEAR Protocol!</h1>
+        <h1>为别人送上一份 NEAR 礼物!</h1>
       </div>
 
       <h4>
-        Claim a name for friends and family on the{' '}
+        为你的朋友或家人在{' '}
         <a href="https://near.org/" target="_blank">
-          NEAR blockchain
+          NEAR 区块链
         </a>
+        上取个名字吧
         .
       </h4>
 
       {wallet.signedIn ? (
         <>
           <p>
-            Your wallet (<strong>{wallet.getAccountId()}</strong>) currently has a balance of <strong>{wallet.balance} N</strong>.
+            你的钱包 (<strong>{wallet.getAccountId()}</strong>) 当前余额为 <strong>{wallet.balance} N</strong>.
           </p>
           <ol>
             <li className="mb-3">
-              When you <strong>submit the form below</strong>, a new account will be created (using the account name you choose) and will be funded with the amount of NEAR tokens
-              that you're gifting to that account (minus a small amount of NEAR that is used to claim the custom account name).
+              当你 <strong>提交下面的表格</strong>时, 将会创建一个新的账户 (使用你给定的账户名称) 并且会转入一定数量的 NEAR ,
+              用于赠送给该账户 (将会扣除少量用于领取该账户的 NEAR).
             </li>
             <li className="mb-3">
-              On the following page, <strong>you'll receive a "magic link"</strong> that you'll be able to share with your friend.
+              在下个页面, 你将会收到 <strong>惊喜链接</strong> 你可以与你的朋友分享.
             </li>
             <li className="mb-3">
-              <strong>Your friend will click the link</strong> that you shared and will then be guided through the easy process of claiming and taking full ownership of that new
-              account.
+              在你的朋友点击你分享的 <strong>链接</strong> 之后，我们将引导ta完成该账户的领取.
             </li>
           </ol>
         </>
@@ -66,11 +66,11 @@ export const Giver = ({ state, update, dispatch }) => {
 
       {wallet.signedIn ? (
         <>
-          <h2 className="pt-3">My Wallet</h2>
+          <h2 className="pt-3">我的钱包</h2>
           <div className={flexClass}>
             <div>
-              <p>{wallet.getAccountId()}</p>
-              <p>Balance: {wallet.balance} N</p>
+              <p>账户: {wallet.getAccountId()}</p>
+              <p>余额: {wallet.balance} N</p>
             </div>
             <button
               className={btnClass + 'ms-3'}
@@ -79,14 +79,14 @@ export const Giver = ({ state, update, dispatch }) => {
                 update('wallet.signedIn', false);
               }}
             >
-              Sign Out
+              退出
             </button>
           </div>
         </>
       ) : (
         <div className={flexClass}>
           <button className={btnClass} onClick={() => wallet.signIn()}>
-            Connect to NEAR Wallet
+            链接 NEAR 钱包
           </button>
         </div>
       )}
@@ -95,12 +95,12 @@ export const Giver = ({ state, update, dispatch }) => {
         <>
           {links && links.length > 0 && (
             <>
-              <h2>Gift Links</h2>
+              <h2>惊喜链接列表</h2>
               <center>
                 {links.map(({ key, accountId, recipientName = '' }) => (
                   <div key={key}>
                     <div>
-                      <strong>{accountId}</strong> {recipientName.length > 0 && <span>for {recipientName}</span>}
+                      <strong>{accountId}</strong> {recipientName.length > 0 && <span> 送给 {recipientName}</span>}
                     </div>
                     <div>
                       <button
@@ -110,20 +110,20 @@ export const Giver = ({ state, update, dispatch }) => {
                           dispatch(onAlert('Copied!'));
                         }}
                       >
-                        Click to Share
+                        点击分享
                       </button>
                     </div>
                   </div>
                 ))}
               </center>
-              <h4 className="mb-3">Include Gift Message (optional)</h4>
+              <h4 className="mb-3">说点什么 (可选)</h4>
               <p className="sub-note">
-                Personalize each link <i>before</i> you "Click to Share" above.
+                在点击上面 “分享” <i>之前</i> 个性化每个链接.
               </p>
               <form className={'was-validated'}>
                 <div className="form-floating mb-3">
                   <textarea type="text" className="form-control" placeholder=" " maxlength="140" value={message} onChange={(e) => setMessage(e.target.value)} />
-                  <label for="fundingAmount">Custom Message</label>
+                  <label for="fundingAmount">自定义信息</label>
                 </div>
                 {/* <div className="form-floating mb-3" name="yt-link">
                                 <input type="text" className="form-control" placeholder=" "
@@ -150,7 +150,7 @@ export const Giver = ({ state, update, dispatch }) => {
                         </select> */}
             </>
           )}
-          <h2 className="mt-5">Create {links && links.length > 0 ? 'Another' : ''} Gift Account</h2>
+          <h2 className="mt-5">创建 {links && links.length > 0 ? '新的' : ''} 礼物账户</h2>
           <form className={'needs-validation ' + (app.wasValidated ? 'was-validated' : '')} autocomplete="off">
             <div className="form-floating">
               <input
@@ -171,15 +171,15 @@ export const Giver = ({ state, update, dispatch }) => {
                   checkDisabled();
                 }}
               />
-              <label for="accountName">Account Name {forExampleWithoutSuffix}</label>
-              <div className="invalid-feedback">{app.accountTaken ? 'Account name is already taken' : '2-48 characters, no spaces, no symbols'}</div>
+              <label for="accountName">账户名称 {forExampleWithoutSuffix}</label>
+              <div className="invalid-feedback">{app.accountTaken ? '账户名称已存在' : '2-48 长度, 无空格, 无符号'}</div>
             </div>
-            <small className="text-muted d-block mb-3">The "{nameSuffix}" suffix will be added automatically to this account name.</small>
+            <small className="text-muted d-block mb-3">"{nameSuffix}" 后缀会自动添加到账户名中.</small>
 
             <div className="form-floating mb-3">
               <input type="number" className="form-control" id="fundingAmount" placeholder=" " required min={0.1} step={0.00001} onChange={() => checkDisabled()} />
-              <label for="fundingAmount">Gift Amount (N)</label>
-              <div className="invalid-feedback">Please enter an amount of NEAR &gt;= 0.1</div>
+              <label for="fundingAmount">要赠送的数量 (N)</label>
+              <div className="invalid-feedback">请输入NEAR数量 &gt;= 0.1</div>
             </div>
 
             <div className="form-floating mb-3">
@@ -194,52 +194,51 @@ export const Giver = ({ state, update, dispatch }) => {
                 autocomplete="off"
                 onChange={() => checkDisabled()}
               />
-              <label for="recipientName">Recipient Name</label>
+              <label for="recipientName">接收者名称</label>
               <section id="accordion">
                 <section id="recipient-name-hint">
                   <a href="#recipient-name-hint">
-                    <small className="text-muted">How does Recipient Name get used?</small>
+                    <small className="text-muted">如何使用接收者名称?</small>
                   </a>
                   <div>
-                    This form only asks for the Recipient Name so your friend will see a friendly greeting on the page when claiming the account. The Recipient Name does not get
-                    stored in the account anywhere.
+                    此表格仅收集接收者名称用来在账户初始化页面展示问候语，接收者的名称并不会存储到账户的任何位置。
                   </div>
                 </section>
               </section>
-              <div className="invalid-feedback">Please enter a name</div>
+              <div className="invalid-feedback">请输入接收者名称</div>
             </div>
           </form>
           <button disabled={disabled} className={btnClass + 'pulse'} onClick={() => wallet.fundAccount(qs('#fundingAmount').value, id, qs('#recipientName').value)}>
-            CREATE GIFT ACCOUNT
+            送出礼物
           </button>
           {links && links.length > 0 && (
             <>
-              <h2 className="mt-5">Backup</h2>
+              <h2 className="mt-5">备份</h2>
 
               <button
                 className={btnClass + 'mt-3'}
                 onClick={() => {
                   let backupTxt = '';
                   links.forEach(({ key, accountId, recipientName = '' }) => {
-                    backupTxt += `accountId: ${getLink(accountId, key, wallet, message, link)} for ${recipientName}\n\n`;
+                    backupTxt += `accountId: ${getLink(accountId, key, wallet, message, link)} 送给 ${recipientName}\n\n`;
                   });
                   share(backupTxt);
                   dispatch(onAlert('Copied!'));
                 }}
               >
-                Copy All Gift Links
+                复制所有礼物链接
               </button>
-              <p className="sub-note">In case your browser's storage is cleared. Keep them somewhere safe!</p>
+              <p className="sub-note">将他们保存在别的地方，以免你的浏览器存储被清除。</p>
             </>
           )}
-          {claimed.length > 0 && <h2 className="mt-5">Past Gifted Accounts</h2>}
+          {claimed.length > 0 && <h2 className="mt-5">之前的礼物链接</h2>}
           {claimed.map(({ key, accountId, recipientName = '' }) => (
             <div key={key}>
               <p className={'mb-0'}>
-                <strong>{accountId}</strong>: claimed by {recipientName}
+                <strong>{accountId}</strong>: 领取人 {recipientName}
               </p>
               <button className={btnClass + 'mb-3'} onClick={() => dispatch(unclaimLink(key))}>
-                Try Share Link Again
+                再次分享链接
               </button>
             </div>
           ))}

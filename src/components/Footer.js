@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer class="container text-center mt-5">
       <small>
-        Questions? Comments? Cookies? Hit us up{' '}
+        要提问? 要讨论? Cookies? 点我➡️{' '}
         <a href="https://twitter.com/NEARProtocol?s=20" target="_blank">
           @NEARProtocol
         </a>{' '}

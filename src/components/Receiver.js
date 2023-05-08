@@ -38,8 +38,8 @@ export const Receiver = ({ state, dispatch }) => {
   if (claiming) {
     return (
       <div class="container container-custom">
-        <h2>DO NOT CLOSE OR REFRESH THIS PAGE</h2>
-        <h2>Claiming Your Account...</h2>
+        <h2>不要关闭该页面</h2>
+        <h2>正在认领账户...</h2>
       </div>
     );
   }
@@ -47,16 +47,16 @@ export const Receiver = ({ state, dispatch }) => {
   if (!keyExists || success === 1) {
     return (
       <div class="container container-custom">
-        <h2>Congratulations!</h2>
+        <h2>恭喜!</h2>
         <ul>
-          <li>Your passphrase is like a password.</li>
-          <li>Do not share it with anyone!</li>
-          <li>Your account is forever tied to this phrase. You can log into or recover your account with your passphrase at wallet.near.org from now on!</li>
+          <li>你的密码就是下面这些单词.</li>
+          <li>不要把该页面分享给任何人!</li>
+          <li>你的账户与些单词永远绑定，从现在开始，你可以登陆或通过这些单词恢复你的钱包账户! near.org </li>
         </ul>
 
         <div class="container text-center mt-5">
           <a href={walletUrl + '/recover-seed-phrase'} target="_blank">
-            <button class={btnClass}>Sign in to NEAR Wallet</button>
+            <button class={btnClass}>登陆到 NEAR 钱包</button>
           </a>
         </div>
 
@@ -67,37 +67,37 @@ export const Receiver = ({ state, dispatch }) => {
               const localSeedPhrase = get(SEED_PHRASE_LOCAL_COPY, '');
               if (!localSeedPhrase.length) {
                 window.alert(
-                  'There is no seed phrase on this device for this gift link. Did you open the link in another browser? Please open that link again and use this button!',
+                  '当前浏览器没有存储助记词，您是否在其他浏览器打开了链接，请再次打开该链接并点击该按钮!',
                 );
               }
               share(localSeedPhrase);
               dispatch(onAlert('Copied!'));
             }}
           >
-            COPY SEED PHRASE
+            复制助记词
           </button>
-          <p class="sub-note">This is a local copy in your browser, just in case you didn't write it down. Please write down your passphrase and keep it somewhere safe!</p>
+          <p class="sub-note">这是你浏览器的本地副本，以防你没有写下来，请写下你的密码，并将其保存在安全的地方！</p>
         </div>
 
         <div class="container text-center mt-5">
-          <p>Sharing is caring! Spread the love ✌️</p>
+          <p>分享关怀！传播爱心✌️</p>
 
           <a
             href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
-              `${sender} gifted me the snazzy NEAR Account Name: ${accountId} @nearprotocol #NEARName https://nearnames.com/ `,
+              `${sender} 给了我时髦的 NEAR 账户: ${accountId} @nearprotocol #NEARName https://nearnames.com/ `,
             )}`}
             target="_blank"
           >
             <button class={btnClass + 'tweet-button'}>
               <img class="tweet-icon" src={tweet} />
-              &nbsp;&nbsp;Tweet About Your Gift
+              &nbsp;&nbsp; 推特分享你的礼物！
             </button>
           </a>
         </div>
 
         <div class="container text-center mt-5">
           <p>
-            Questions? Comments? Cookies?
+            要提问? 要讨论? Cookies? 点我➡️{' '}
             <br />
             Hit us up{' '}
             <a href="https://twitter.com/NEARProtocol?s=20" target="_blank">
@@ -113,19 +113,19 @@ export const Receiver = ({ state, dispatch }) => {
   return (
     <>
       <div class="text-center mt-3 mb-5">
-        <h3>Welcome to NEAR!</h3>
+        <h3>欢迎来到 NEAR!</h3>
         <p>
-          <b>{sender}</b> has gifted you a brand new{' '}
+          <b>{sender}</b> 送了你一个全新的{' '}
           <a href="https://near.org/" target="_blank">
             NEAR
           </a>{' '}
-          account (<b>{accountId}</b>), along with some NEAR tokens inside it!
+          账户 (<b>{accountId}</b>), 里面包含了一些 NEAR!
         </p>
 
         {message && message.length > 0 && (
           <div className="card p-3">
             <p>
-              Message from <b>{sender}</b>:
+              来自 <b>{sender}</b> 的消息:
             </p>
             <p>{message}</p>
           </div>
@@ -176,29 +176,27 @@ export const Receiver = ({ state, dispatch }) => {
         </div> */}
 
       <div class="instructions">
-        <p>To accept this gift (i.e. claim ownership of your new account), simply follow the steps below.</p>
-        <p>The passphrase that you'll see below is like an account password but with a couple important differences:</p>
+        <p>要接受这份礼物 (即：获取你新账户的所有权), 只需要按照如下步骤操作即可.</p>
+        <p>你将在下面看到密码类似于账户密码，区别如下:</p>
         <ul>
           <li className="mb-3">
-            Anyone who knows a NEAR account's passphrase has full control of the account without even needing to know the account name. (So keep the passphrase private!)
+            任何知道密码的人，都可以完全控制该账户，甚至不需要知道你的账户名称. (所以请保证你的密码安全!)
           </li>
           <li>
-            If you were to forget your passphrase, you'd completely lose access to your account. You would be permanently locked out. (Even the NEAR team does not have the ability
-            to assign a new passphrase to an account.)
+            如果你忘记了密码，你将永远无法访问你的账户，您的账户将被永远锁定。 (即使是 NEAR 团队成员也无法恢复你的账户，或分配新的密码)
           </li>
         </ul>
-        <h3>Claim Your New Account</h3>
+        <h3>领取你的新账户</h3>
         <ol>
-          <li className="mb-3">Click the button below to reveal your passphrase.</li>
-          <li className="mb-3">Write those 12 words down in their exact order.</li>
-          <li className="mb-3">Click the "Claim My Account Now" button once you've safely stored your passphrase somewhere.</li>
-          <li className="mb-3">Do not share your passphrase with anyone! This passphrase controls your NEAR account and its NEAR tokens, so keep it somewhere safe and private.</li>
+          <li className="mb-3">点击下面的按钮显示你的密码.</li>
+          <li className="mb-3">按照正确的顺序书写这12个单词.</li>
+          <li className="mb-3">点击“立即领取我的账户”，查看密码，并将你的密码安全的存放起来.</li>
+          <li className="mb-3">不要向任何人分享你的密码！这个密码可以控制你的 NEAR 账户和财产，所以请保证它的安全性和隐私性.</li>
           <li>
-            Going forward, you can use your passphrase at{' '}
+            接下来, 你可以通过你的密码来访问 {''}
             <a href={walletUrl} target="_blank">
               wallet.near.org
-            </a>{' '}
-            to access your account.
+            </a>.
           </li>
         </ol>
 
@@ -210,13 +208,13 @@ export const Receiver = ({ state, dispatch }) => {
               setSeedHidden(!seedHidden);
             }}
           >
-            Reveal My Passphrase
+            显示你的密码
           </button>
         )}
 
         <div class="form-floating mb-3">
           <textarea readonly class="form-control" id="seedPhrase" value={seedHidden ? `******** ****  ********  ******` : seedPhrase} />
-          <label for="seedPhrase">Passphrase</label>
+          <label for="seedPhrase">密码</label>
         </div>
 
         {!seedHidden && (
@@ -229,7 +227,7 @@ export const Receiver = ({ state, dispatch }) => {
                 dispatch(onAlert('Copied!'));
               }}
             >
-              Copy Passphrase
+              复制密码
             </button>
 
             <br />
@@ -242,25 +240,25 @@ export const Receiver = ({ state, dispatch }) => {
                     await dispatch(keyRotation());
                     setSuccess(1);
                   } catch (e) {
+                    // 无法签署交易验证
                     if (e.message.indexOf('Can not sign transactions') > -1) {
-                      alert('It looks like the account has already been claimed!');
+                      alert('该账户已被认领!');
                       setSuccess(1);
                     } else {
-                      alert('There was an error claiming your account. Please try again.');
+                      alert('你的账号认领时出现了问题. 请重试.');
                       console.error(e);
                     }
                   }
                   setClaiming(false);
                 }}
               >
-                I wrote down my passphrase! CLAIM MY ACCOUNT NOW!
+                我写下了我的密码! 立即认领我的账户!
               </button>
             </center>
           </>
         )}
         <small className="text-muted">
-          (Until you click the "Claim My Account" button, the account technically remains available for anyone to claim by visiting this special account claiming page, but
-          presumably you are the only person who knows the URL of this page, other than the friend who sent it to you.)
+          (在你点击“认领我的账户”按钮之前.从技术上来说，这个账户可以被任何访问该链接的人认领，但是正常情况下，只有分享链接的朋友和你知道。)
         </small>
       </div>
     </>
