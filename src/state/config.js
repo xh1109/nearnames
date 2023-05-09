@@ -1,6 +1,7 @@
 import { BN } from 'bn.js';
 
 // testnet / default
+// 基础配置 默认为测试网络
 let config = {
   SEED_PHRASE_LOCAL_COPY: '__SEED_PHRASE_LOCAL_COPY',
   FUNDING_DATA: '__FUNDING_DATA',
@@ -13,6 +14,7 @@ let config = {
   contractName: 'testnet',
 };
 
+// 生产环境配置
 if (process.env.REACT_APP_ENV === 'prod') {
   config = {
     ...config,
