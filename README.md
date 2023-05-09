@@ -1,3 +1,10 @@
+# WHY？
+
+英文不好，就一点点看下来顺道翻译了一下。可能会有差错，但是问题应该不是很大。
+如果只是依赖现有的sdk做一些应用。这个例子应该是很简单明了的。
+由于我不太会 react 就不多讲了。
+
+
 # NEAR Names
 
 This repo is the source code for https://nearnames.com, which is hosted by [GitHub Pages](https://pages.github.com/). (See the `deploy` script in [package.json](package.json).)
