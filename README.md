@@ -19,6 +19,13 @@ yarn start
 # How It Works
 
 TODO: Document which contracts are involved and what the flow is.
+- connect
+- Account
+- WalletAccount
+- requestSignIn
+- formatNearAmount
+- isAccountTaken
+- 
 
 # Analytics
 

@@ -85,10 +85,13 @@ export const initNear =
       // 钱包/合约 恢复流程
       const wallet = new nearAPI.WalletAccount(near);
       wallet.signIn = () => {
+        // 重定向到钱包认证页面
         wallet.requestSignIn(contractName, SIGN_IN_TITLE);
       };
+      // 是否通过钱包授权（是否签名）
       wallet.signedIn = wallet.isSignedIn();
       if (wallet.signedIn) {
+        // 单位转换
         wallet.balance = formatNearAmount((await wallet.account().getAccountBalance()).available, 2);
       }
 
@@ -115,8 +118,10 @@ export const initNear =
         if (parseFloat(amount, 10) < 0.1 || accountId.length < 2 || accountId.length > 48) {
           return update('app.wasValidated', true);
         }
+        // 生成密钥，传入加密曲线
         const keyPair = KeyPair.fromRandom('ed25519');
-
+        console.log(keyPair);
+        alert(1)
         const links = get(ACCOUNT_LINKS, []);
         links.push({ key: keyPair.secretKey, accountId, recipientName, keyStored: Date.now() });
         set(ACCOUNT_LINKS, links);
@@ -153,10 +158,13 @@ export const keyRotation =
   () =>
     async ({ update, getState, dispatch }) => {
       const state = getState();
+      // key ,账户id,公钥,助记词
       const { key, accountId, publicKey, seedPhrase } = state.accountData;
 
       const keyPair = KeyPair.fromString(key);
+      // 内存中签名
       const signer = await InMemorySigner.fromKeyPair(networkId, accountId, keyPair);
+      // 初始化 near 网络
       const near = await nearAPI.connect({
         networkId,
         nodeUrl,
@@ -164,13 +172,16 @@ export const keyRotation =
         deps: { keyStore: signer.keyStore },
       });
       const account = new nearAPI.Account(near.connection, accountId);
+      // 获取 access key
       const accessKeys = await account.getAccessKeys();
       const actions = [deleteKey(PublicKey.from(accessKeys[0].public_key)), addKey(PublicKey.from(publicKey), fullAccessKey())];
 
+      // 当前的助记词写入本地存储
       set(SEED_PHRASE_LOCAL_COPY, seedPhrase);
 
       const result = await account.signAndSendTransaction(accountId, actions);
 
+      // 分析统计服务
       fetch(ANALYTICS_URL, {
         method: 'POST',
         body: JSON.stringify({

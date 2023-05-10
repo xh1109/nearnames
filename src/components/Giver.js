@@ -231,7 +231,7 @@ export const Giver = ({ state, update, dispatch }) => {
               <p className="sub-note">将他们保存在别的地方，以免你的浏览器存储被清除。</p>
             </>
           )}
-          {claimed.length > 0 && <h2 className="mt-5">之前的礼物链接</h2>}
+          {claimed.length > 0 && <h2 className="mt-5">已被领取的礼物链接</h2>}
           {claimed.map(({ key, accountId, recipientName = '' }) => (
             <div key={key}>
               <p className={'mb-0'}>
